@@ -12,13 +12,12 @@ ROOT = Path(__file__).parent
 SRC = ROOT / "src"
 OUT = ROOT / "site"
 DOMAIN = "https://www.nairobisleepcenter.com"
-ASSET_V = "1"  # bump when CSS/JS change so browsers fetch the new file
+ASSET_V = "3"  # bump when CSS/JS change so browsers fetch the new file
 TODAY = datetime.date.today().isoformat()
 
 # --------------------------------------------------------------- clinic facts
-# CONFIRM BEFORE LAUNCH: the old site shows two phones, two addresses and two
-# sets of hours (see README). These are the values used by the footer/Contact
-# page of the old site; change them here and every page updates.
+# Contact details from the clinic's company profile (June 2026). Opening hours
+# are not in the profile: CONFIRM them (see README).
 CLINIC = {
     "name": "The Sleep Diagnostic & Treatment Centre",
     "short": "The Sleep Centre",
@@ -27,13 +26,18 @@ CLINIC = {
     "area": "Lavington",
     "city": "Nairobi",
     "country": "KE",
-    "phone": "+254 780 537 851",
-    "tel": "+254780537851",
-    "whatsapp": "254780537851",
-    "email": "",  # add the clinic inbox, e.g. info@nairobisleepcenter.com
+    "phone": "+254 780 587 851",
+    "tel": "+254780587851",
+    "phone2": "+254 768 824 184",
+    "tel2": "+254768824184",
+    "whatsapp": "254780587851",
+    "email": "admin@nairobisleepcenter.com",
+    "pobox": "P.O. Box 29740 – 00202, Nairobi, Kenya",
+    "licence": "016750",
+    "tagline": "Better Sleep for Better Health",
     "maps": "https://www.google.com/maps/search/?api=1&query=Sleep+Diagnostic+and+Treatment+Centre+Mbaazi+Avenue+Lavington+Nairobi",
     "map_embed": "https://www.google.com/maps?q=Mbaazi+Avenue+Lavington+Nairobi&output=embed",
-    "founded": "2019",
+    "founded": "2018",
 }
 HOURS = [("Monday to Saturday", "8:00 am – 5:00 pm"), ("Sunday & public holidays", "Closed")]
 HOURS_SCHEMA = [{"@type": "OpeningHoursSpecification",
@@ -72,7 +76,6 @@ I = {
     "book": ic('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7"/>'),
     "wa": '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.5c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.6.9 1-3.5-.2-.4A9.4 9.4 0 0 1 2.6 12C2.6 6.8 6.8 2.6 12 2.6S21.4 6.8 21.4 12 17.2 21.5 12 21.5zM12 .8C5.8.8.8 5.8.8 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.9-1.5c1.6.9 3.5 1.4 5.4 1.4 6.2 0 11.2-5 11.2-11.2S18.2.8 12 .8z"/></svg>',
 }
-LOGO = '''<svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c55c9"/><stop offset="1" stop-color="#3a1d6e"/></linearGradient></defs><circle cx="24" cy="24" r="23" fill="url(#lg)"/><path d="M30.5 31.5A11 11 0 1 1 22 13a9 9 0 0 0 8.5 18.5z" fill="#f3c97f"/><circle cx="33" cy="15" r="1.6" fill="#fff"/><circle cx="37" cy="21.5" r="1" fill="#fff" opacity=".7"/></svg>'''
 
 
 def wa_link(text="Hello, I'd like to ask about a sleep assessment."):
@@ -280,7 +283,7 @@ STUDY_FAQS = [
 
 GENERAL_FAQS = [
     ("Do I need a doctor's referral to book?", "No. You can book a consultation or sleep assessment with us directly. If you have a referral letter or earlier test results, please bring them."),
-    ("Where are you located?", f"We are at {CLINIC['street']}, {CLINIC['area']}, {CLINIC['city']}. Parking is available on site; call us if you need directions."),
+    ("Where are you located?", f"We are at {CLINIC['street']}, {CLINIC['area']}, {CLINIC['city']}. Call us on {CLINIC['phone']} if you need directions."),
     ("What are your opening hours?", f"The clinic is open {HOURS[0][0].lower()}, {HOURS[0][1]}. {STUDY_HOURS}"),
     ("Do you accept medical insurance?", "Many insurers cover consultations and sleep studies. Contact us with your insurer's name and we will help you check your cover and any pre-authorisation needed."),
     ("Do you see children?", "Yes. Snoring, breathing pauses and restless sleep in children should always be assessed. Call us so we can book the right appointment for your child's age."),
@@ -288,9 +291,15 @@ GENERAL_FAQS = [
 ]
 GENERAL_FAQS = STUDY_FAQS[:3] + GENERAL_FAQS
 
-TEAM = [
-    {"name": "Dr Samuel Nyagah", "role": "ENT surgeon · Sleep disorders", "init": "SN",
+FOUNDERS = [
+    {"name": "Prof. Muthure Macharia", "role": "Co-founder · ENT surgeon", "init": "MM",
+     "bio": "Ear, nose and throat surgeon and co-founder of the centre."},
+    {"name": "Dr Chimmy Omamo-Olende", "role": "Co-founder · ENT surgeon", "init": "CO",
+     "bio": "Ear, nose and throat surgeon and co-founder of the centre."},
+    {"name": "Dr Samuel M. Nyagah", "role": "Co-founder · ENT surgeon", "init": "SN",
      "bio": "Ear, nose and throat surgeon who treats sleep disorders, with a focus on snoring, sleep apnoea and the airway."},
+]
+TEAM = FOUNDERS + [
     {"name": "Dr Caroline Muturi", "role": "Specialist doctor", "init": "CM",
      "bio": "Part of the medical team assessing patients with sleep problems and planning their treatment."},
     {"name": "Margaret Karani", "role": "Clinical psychologist", "init": "MK",
@@ -346,7 +355,9 @@ def org_schema():
     s = {"@context": "https://schema.org", "@type": ["MedicalClinic", "MedicalBusiness"], "@id": DOMAIN + "/#clinic",
          "name": CLINIC["name"], "alternateName": [CLINIC["short"], "Nairobi Sleep Center", CLINIC["abbr"]],
          "url": DOMAIN + "/", "logo": DOMAIN + "/assets/img/logo.png", "image": DOMAIN + "/assets/img/og.png",
-         "telephone": CLINIC["tel"], "foundingDate": CLINIC["founded"], "priceRange": "KES",
+         "telephone": CLINIC["tel"], "foundingDate": CLINIC["founded"], "priceRange": "KES", "slogan": CLINIC["tagline"],
+         "founder": [{"@type": "Person", "name": f["name"], "jobTitle": "ENT surgeon"} for f in FOUNDERS],
+         "contactPoint": [{"@type": "ContactPoint", "telephone": t, "contactType": "appointments", "areaServed": "KE"} for t in (CLINIC["tel"], CLINIC["tel2"])],
          "medicalSpecialty": ["SleepMedicine", "Otolaryngologic", "Psychiatric"],
          "address": {"@type": "PostalAddress", "streetAddress": CLINIC["street"], "addressLocality": f"{CLINIC['area']}, {CLINIC['city']}",
                      "addressRegion": "Nairobi", "addressCountry": CLINIC["country"]},
@@ -409,7 +420,7 @@ def header(path):
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
  <div class="wrap nav">
-  <a class="brand" href="/" aria-label="{escape(CLINIC['name'])}, home">{LOGO}<span><b>The Sleep Centre</b><small>Diagnostic &amp; Treatment · Nairobi</small></span></a>
+  <a class="brand" href="/"><img src="/assets/img/logo-reverse.svg" width="120" height="63" alt="The Sleep Diagnostic and Treatment Center, home"></a>
   <nav aria-label="Main"><ul class="menu" id="menu">{items}<li class="menu-book"><a href="/book-appointment/">Book a sleep study</a></li></ul></nav>
   <div class="nav-cta">
    <a class="nav-phone" href="tel:{CLINIC['tel']}">{I['phone']}{CLINIC['phone']}</a>
@@ -433,8 +444,9 @@ def footer():
 <footer class="site-footer">
  <div class="wrap foot-grid">
   <div>
-   <a class="brand" href="/">{LOGO}<span><b>The Sleep Centre</b><small>Diagnostic &amp; Treatment · Nairobi</small></span></a>
-   <p>A specialist sleep laboratory and clinic in Nairobi, diagnosing and treating sleep apnoea, snoring, insomnia and other sleep disorders since {CLINIC['founded']}.</p>
+   <a class="brand brand-foot" href="/"><img src="/assets/img/logo-reverse.svg" width="210" height="110" alt="The Sleep Diagnostic and Treatment Center: Better Sleep for Better Health" loading="lazy"></a>
+   <p>A specialist sleep laboratory and clinic in Nairobi, diagnosing and treating sleep apnoea, snoring, insomnia and other sleep disorders since {CLINIC['founded']}. Founded by ENT surgeons.</p>
+   <p class="licence">Licensed by the Medical Practitioners and Dentists Board · Licence No. {CLINIC['licence']}</p>
    {socials}
    <p class="family">Part of the Nairobi ENT family: {fam}</p>
   </div>
@@ -442,9 +454,9 @@ def footer():
   <div><h3>Patients</h3><ul><li><a href="/sleep-study-polysomnography/">Sleep study</a></li><li><a href="/cpap-equipment/">CPAP &amp; equipment</a></li><li><a href="/book-appointment/">Book an appointment</a></li><li><a href="/our-team/">Our team</a></li><li><a href="/about-us/">About us</a></li><li><a href="/faqs/">FAQs</a></li></ul></div>
   <div><h3>Visit &amp; contact</h3><ul>
    <li><a href="{CLINIC['maps']}" rel="noopener" target="_blank">{CLINIC['street']}, {CLINIC['area']}, {CLINIC['city']}</a></li>
-   <li><a href="tel:{CLINIC['tel']}">{CLINIC['phone']}</a></li>
+   <li><a href="tel:{CLINIC['tel']}">{CLINIC['phone']}</a> · <a href="tel:{CLINIC['tel2']}">{CLINIC['phone2']}</a></li>
    <li><a href="{wa_link()}" rel="noopener" target="_blank">WhatsApp us</a></li>{email}
-   {hours}</ul></div>
+   {hours}<li>{CLINIC['pobox']}</li></ul></div>
  </div>
  <div class="wrap foot-base"><span>© <span data-year>{datetime.date.today().year}</span> {CLINIC['name']}. Information on this site is general and does not replace a consultation.</span><span><a href="/privacy-policy/">Privacy policy</a> · <a href="/contact-us/">Contact</a></span></div>
 </footer>
@@ -500,7 +512,7 @@ def cond_cards(exclude=None, feature_first=False):
 def aside(current):
     links = "".join(f'<li><a href="/{c["slug"]}/"{" aria-current=\"page\"" if c["slug"]==current else ""}>{c["name"]}</a></li>' for c in CONDITIONS)
     return f'''<aside class="aside"><div class="book-card"><h3>Book a sleep assessment</h3><p>Talk to a specialist, or go straight to an overnight sleep study.</p>
-<a class="btn moon" href="/book-appointment/">{I['cal']}Book now</a><a class="btn ghost" href="tel:{CLINIC['tel']}" style="margin-top:10px">{I['phone']}{CLINIC['phone']}</a></div>
+<a class="btn moon" href="/book-appointment/">{I['cal']}Book now</a><a class="btn ghost" href="tel:{CLINIC['tel']}" style="margin-top:10px">{I['phone']}{CLINIC['phone']}</a><p style="margin:12px 0 0;font-size:.88rem;text-align:center">or {CLINIC['phone2']}</p></div>
 <div class="panel"><nav aria-label="Sleep conditions"><h3>Sleep conditions</h3><ul>{links}<li><a href="/what-is-sleep/"{" aria-current=\"page\"" if current=="what-is-sleep" else ""}>What is sleep?</a></li></ul></nav></div></aside>'''
 
 # --------------------------------------------------------------- pages
@@ -514,7 +526,7 @@ def home():
  <div class="wrap hero-grid">
   <div>
    <h1><span class="h1-kicker">Sleep apnoea, snoring &amp; insomnia care in Nairobi</span>Better nights start with <em>answers.</em></h1>
-   <p class="lead">A specialist sleep laboratory where ENT surgeons, psychologists and sleep technologists work out exactly why you are not sleeping well, and then treat it.</p>
+   <p class="lead">A specialist sleep laboratory founded by ENT surgeons, where doctors, psychologists and sleep technologists work out exactly why you are not sleeping well, and then treat it.</p>
    <div class="hero-ctas"><a class="btn moon" href="/book-appointment/">{I['cal']}Book a sleep study</a><a class="btn ghost" href="{wa_link()}" target="_blank" rel="noopener">{I['wa']}WhatsApp us</a></div>
    <ul class="trust"><li>{I['lab']}Overnight lab sleep studies</li><li>{I['team']}Multidisciplinary team</li><li>{I['mask']}CPAP set-up &amp; follow-up</li></ul>
   </div>
@@ -545,7 +557,7 @@ def home():
  <div class="sec-head"><p class="eyebrow">A night in our sleep lab</p><h2>Check in at dusk. <em>Leave with data.</em></h2><p class="lead">An overnight sleep study (polysomnography) is the gold standard for diagnosing sleep apnoea and other sleep disorders. Here is how it works.</p></div>
  <ol class="timeline reveal">
   <li><time>Before</time><h3>Consultation</h3><p>A specialist takes your history, examines your airway and decides which test you need.</p></li>
-  <li><time>Evening</time><h3>Check in</h3><p>Arrive in comfortable night clothes. Your private room feels more hotel than hospital.</p></li>
+  <li><time>Evening</time><h3>Check in</h3><p>Arrive in comfortable night clothes. Your private room is designed to feel like your own bedroom.</p></li>
   <li><time>Bedtime</time><h3>Painless sensors</h3><p>Small sensors on the scalp, face, chest, legs and finger record your sleep. Nothing hurts.</p></li>
   <li><time>All night</time><h3>Watched over</h3><p>A sleep technologist monitors breathing, oxygen, heart and brain activity until morning.</p></li>
   <li><time>After</time><h3>Results &amp; plan</h3><p>Your study is scored and reported, then reviewed with you alongside a treatment plan.</p></li>
@@ -568,7 +580,7 @@ def home():
  <div class="reveal"><p class="eyebrow">Treatment</p><h2>A diagnosis is only half the job. <em>We treat it too.</em></h2>
  <p class="lead">Your report comes with a plan, and a team to carry it out under one roof and across the Nairobi ENT family.</p>
  <ul class="ticks"><li><strong>CPAP therapy</strong> for sleep apnoea, with machine and mask fitting, and follow-up until it feels natural.</li>
- <li><strong>ENT and airway treatment</strong> for nasal blockage, large tonsils and other structural causes.</li>
+ <li><strong>Non-surgical and surgical treatment of sleep apnoea</strong> by our founding ENT surgeons, for nasal blockage, large tonsils and other airway causes.</li>
  <li><strong>CBT for insomnia</strong> and psychology support, the recommended first treatment for chronic insomnia.</li>
  <li><strong>Specialist medical management</strong> for narcolepsy, restless legs and limb movement disorders.</li></ul>
  <a class="link-arrow" href="/cpap-equipment/">CPAP machines, masks &amp; supplies {I['arrow']}</a></div>
@@ -700,16 +712,19 @@ def about():
     body = page_hero(crumbs, "Specialist sleep care, <em>made in Nairobi</em>", f"Since {CLINIC['founded']}, The Sleep Diagnostic &amp; Treatment Centre has given Kenyans a place to get sleep problems properly measured and treated, close to home.", eyebrow="About us") + f'''
 <section class="section"><div class="wrap split">
 <div class="reveal prose"><h2>Why we exist</h2>
-<p>Sleep disorders are common, serious and often missed. Too many people spend years tired, snoring or lying awake, or are told to "just relax", without anyone measuring what actually happens to them at night.</p>
-<p>We set up a dedicated sleep laboratory so that patients in Kenya and the region can have overnight sleep studies locally, and then get treatment from one coordinated team.</p>
-<h2>Our mission</h2>
-<p><strong>To help every patient sleep and live better, with accurate diagnosis, evidence-based treatment and personal, respectful care.</strong></p></div>
+<p>The Sleep Diagnostic and Treatment Centre (SDTC) is a dedicated sleep laboratory for the diagnosis and treatment of sleep disorders. It was founded in {CLINIC['founded']} by three ear, nose and throat surgeons, Prof. Muthure Macharia, Dr Chimmy Omamo-Olende and Dr Samuel M. Nyagah, so that patients in Kenya and the region could have sleep studies close to home.</p>
+<p>We are in a quiet, accessible setting on Mbaazi Avenue in Lavington. Our study rooms are designed to feel like your own bedroom, because the more natural your night, the more accurately the results reflect the sleep you get every night.</p></div>
 <div class="grid-2 reveal">
  <div class="card"><div class="card-icon">{I['lab']}</div><h3>Sleep laboratory</h3><p style="margin:0">Private, comfortable rooms for overnight polysomnography, monitored by trained technologists.</p></div>
  <div class="card"><div class="card-icon">{I['team']}</div><h3>One team</h3><p style="margin:0">ENT, psychology and sleep technology working from the same results.</p></div>
  <div class="card"><div class="card-icon">{I['shield']}</div><h3>Evidence first</h3><p style="margin:0">Treatment based on your own data and international guidelines.</p></div>
- <div class="card feature"><div class="card-icon">{I['moon']}</div><h3>Since {CLINIC['founded']}</h3><p style="margin:0">Serving patients from across Kenya and the region.</p></div>
+ <div class="card feature"><div class="card-icon">{I['moon']}</div><h3>Since {CLINIC['founded']}</h3><p style="margin:0">Founded by ENT surgeons, serving patients from across Kenya and the region.</p></div>
 </div></div></section>
+<section class="section night"><div class="stars"></div><div class="wrap">
+<div class="sec-head center reveal"><p class="eyebrow">Our vision</p><h2>Better sleep for <em>better health.</em></h2></div>
+<div class="grid-2 reveal"><div class="panel"><h3>Our mission</h3><p style="margin:0">To provide high quality, ethical and personalised diagnosis and treatment of sleep-related disorders through timely and cost-effective services, using competent, well-trained staff and state-of-the-art technology.</p></div>
+<div class="panel"><h3>Our values</h3><ul class="ticks" style="margin:0"><li>Integrity</li><li>Confidentiality</li><li>Compassion</li><li>Reliability</li><li>Passion</li></ul></div></div>
+</div></section>
 <section class="section mist"><div class="wrap split">
 <div class="reveal"><p class="eyebrow">The Nairobi ENT family</p><h2>Breathe, hear, <em>sleep.</em></h2><p class="lead">We work alongside two sister clinics, so a problem that crosses specialties gets joined-up care.</p></div>
 <div class="grid-2 reveal">{"".join(f'<a class="card" href="{u}" rel="noopener"><h3>{n}</h3><p>Specialists in {d}.</p><span class="link-arrow">Visit site {I["arrow"]}</span></a>' for n, u, d in FAMILY)}</div>
@@ -717,7 +732,7 @@ def about():
 <section class="section"><div class="wrap"><div class="sec-head"><p class="eyebrow">Our people</p><h2>Meet the <em>team</em></h2></div><div class="team">{team_cards()}</div>
 <p style="margin-top:28px"><a class="link-arrow" href="/our-team/">More about our team {I['arrow']}</a></p></div></section>{cta_band()}'''
     write("/about-us/", "About The Sleep Diagnostic & Treatment Centre, Nairobi",
-          f"Nairobi's specialist sleep laboratory since {CLINIC['founded']}: overnight sleep studies and coordinated sleep care, part of the Nairobi ENT family.", body, crumbs=crumbs)
+          f"A specialist sleep laboratory in Lavington, Nairobi, founded by ENT surgeons in {CLINIC['founded']}. Sleep studies and treatment for sleep disorders.", body, crumbs=crumbs)
 
 
 def team_cards():
@@ -726,7 +741,7 @@ def team_cards():
 
 def team():
     crumbs = [("Home", "/"), ("Our team", "/our-team/")]
-    body = page_hero(crumbs, "The people <em>behind your night</em>", "Sleep problems rarely have a single cause, so our patients are looked after by specialists from several disciplines.", eyebrow="Our team") + f'''
+    body = page_hero(crumbs, "The people <em>behind your night</em>", "Founded by ENT surgeons and supported by psychology and sleep technology, because sleep problems rarely have a single cause.", eyebrow="Our team") + f'''
 <section class="section"><div class="wrap"><div class="team">{team_cards()}</div></div></section>
 <section class="section mist"><div class="wrap split"><div class="reveal"><h2>How we <em>work together</em></h2></div>
 <div class="reveal"><ul class="ticks"><li>Your consultation, sleep study and review are coordinated by one team</li><li>Results are shared between the specialists involved in your care</li><li>Referrals to ENT, psychology, psychiatry and other specialists are arranged for you when needed</li><li>Your GP or referring doctor receives a report, with your consent</li></ul></div></div></section>{cta_band()}'''
@@ -766,9 +781,9 @@ def contact():
     body = page_hero(crumbs, "Contact <em>us</em>", "Questions about symptoms, sleep studies, CPAP or insurance? We're happy to help.", eyebrow="Contact") + f'''
 <section class="section"><div class="wrap split" style="align-items:stretch">
 <div class="panel"><ul class="contact-list">
-<li><span class="ci">{I['phone']}</span><div><b>Call</b><a href="tel:{CLINIC['tel']}">{CLINIC['phone']}</a></div></li>
+<li><span class="ci">{I['phone']}</span><div><b>Call</b><a href="tel:{CLINIC['tel']}">{CLINIC['phone']}</a><br><a href="tel:{CLINIC['tel2']}">{CLINIC['phone2']}</a></div></li>
 <li><span class="ci">{I['wa']}</span><div><b>WhatsApp</b><a href="{wa_link()}" target="_blank" rel="noopener">Chat with us</a></div></li>{email}
-<li><span class="ci">{I['pin']}</span><div><b>Visit</b>{CLINIC['street']}, {CLINIC['area']}, {CLINIC['city']}<br><a href="{CLINIC['maps']}" target="_blank" rel="noopener">Get directions</a></div></li>
+<li><span class="ci">{I['pin']}</span><div><b>Visit</b>{CLINIC['street']}, {CLINIC['area']}, {CLINIC['city']}<br><a href="{CLINIC['maps']}" target="_blank" rel="noopener">Get directions</a><br><span style="font-size:.9rem;color:var(--muted)">Postal: {CLINIC['pobox']}</span></div></li>
 <li><span class="ci">{I['clock']}</span><div><b>Hours</b><table class="hours">{"".join(f"<tr><td>{d}</td><td>{h}</td></tr>" for d, h in HOURS)}</table><p style="font-size:.9rem;margin:10px 0 0">{STUDY_HOURS}</p></div></li></ul>
 <p style="margin:28px 0 0"><a class="btn" href="/book-appointment/">{I['cal']}Book an appointment</a></p></div>
 <iframe class="map" title="Map showing the clinic location in Lavington, Nairobi" src="{CLINIC['map_embed']}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

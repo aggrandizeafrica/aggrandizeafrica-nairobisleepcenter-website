@@ -1,0 +1,111 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": "site",
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/book-appointment-2",
+      "destination": "/book-appointment/",
+      "permanent": true
+    },
+    {
+      "source": "/sleep-studypolysomnography",
+      "destination": "/sleep-study-polysomnography/",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/conditions/",
+      "permanent": true
+    },
+    {
+      "source": "/equipments",
+      "destination": "/cpap-equipment/",
+      "permanent": true
+    },
+    {
+      "source": "/equipments/:path*",
+      "destination": "/cpap-equipment/",
+      "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "/about-us/",
+      "permanent": true
+    },
+    {
+      "source": "/blog-classic",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/author/admin",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy-policy/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap_index.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/readme.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(fonts|img)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(css|js)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ]
+}

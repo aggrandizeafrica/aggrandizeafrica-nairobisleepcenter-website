@@ -12,7 +12,7 @@ ROOT = Path(__file__).parent
 SRC = ROOT / "src"
 OUT = ROOT / "site"
 DOMAIN = "https://www.nairobisleepcenter.com"
-ASSET_V = "3"  # bump when CSS/JS change so browsers fetch the new file
+ASSET_V = "4"  # bump when CSS/JS change so browsers fetch the new file
 TODAY = datetime.date.today().isoformat()
 
 # --------------------------------------------------------------- clinic facts
@@ -341,7 +341,7 @@ def hypnogram():
         pts.append(f"{round(x0 + tt*w,1)},{round(172 + dip - 4*math.sin(k*1.7)*0.2,1)}")
     spo2 = '<polyline class="spo2" points="' + " ".join(pts) + '"/>'
     return f'''<svg class="hypno" viewBox="0 0 570 214" role="img" aria-label="Illustration of a hypnogram: sleep stages moving through about five cycles across one night, with an oxygen trace below.">
-<defs><linearGradient id="hg" x1="0" x2="1"><stop offset="0" stop-color="#c9b8f3"/><stop offset=".55" stop-color="#ffffff"/><stop offset="1" stop-color="#f3c97f"/></linearGradient></defs>
+<defs><linearGradient id="hg" x1="0" x2="1"><stop offset="0" stop-color="#d6c3e8"/><stop offset=".55" stop-color="#ffffff"/><stop offset="1" stop-color="#74d9a6"/></linearGradient></defs>
 <g class="grid">{grid}</g>{"".join(rem)}{labels}
 <path class="trace" d="{"".join(d)}"/>
 <text class="lbl" x="0" y="178">SpO₂</text>{spo2}{hrs}</svg>'''
@@ -392,7 +392,7 @@ def head(path, title, desc, schema):
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(desc)}">
 <link rel="canonical" href="{url}">
-<meta name="theme-color" content="#0d0a24">
+<meta name="theme-color" content="#764c8c">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
@@ -420,7 +420,7 @@ def header(path):
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
  <div class="wrap nav">
-  <a class="brand" href="/"><img src="/assets/img/logo-reverse.svg" width="120" height="63" alt="The Sleep Diagnostic and Treatment Center, home"></a>
+  <a class="brand" href="/"><img src="/assets/img/logo.svg" width="126" height="66" alt="The Sleep Diagnostic and Treatment Center, home"></a>
   <nav aria-label="Main"><ul class="menu" id="menu">{items}<li class="menu-book"><a href="/book-appointment/">Book a sleep study</a></li></ul></nav>
   <div class="nav-cta">
    <a class="nav-phone" href="tel:{CLINIC['tel']}">{I['phone']}{CLINIC['phone']}</a>

@@ -2,7 +2,7 @@
 
 A new static website for [nairobisleepcenter.com](https://www.nairobisleepcenter.com) that replaces the WordPress build. It is plain HTML, CSS and a little JavaScript, with no plugins, no database and nothing to patch.
 
-**Design direction:** "Better nights start with answers." The site uses midnight indigo with the official logo purple `#764C8C` and green `#007647`, plus moonlight gold as the accent for buttons. The official logo (taken from the clinic's logo PDF and kept as vector) is used in a reversed white-and-green version on the dark header and footer. The full-colour version is at `src/assets/img/logo.svg`. The signature visual is an animated hypnogram (a sleep-stage chart from a sleep study), so the first thing a visitor sees is what the clinic actually measures. Headings are set in Fraunces and body text in Manrope, both self-hosted.
+**Design direction:** "Better nights start with answers." The site uses the official logo purple `#764C8C` and green `#007647`, with brand green as the button colour. The full-colour logo sits on a white header, and a reversed white-and-green version is used on the deep-purple footer. Dark sections use deeper shades of the brand purple. The full-colour version is at `src/assets/img/logo.svg`. The signature visual is an animated hypnogram (a sleep-stage chart from a sleep study), so the first thing a visitor sees is what the clinic actually measures. Headings are set in Fraunces and body text in Manrope, both self-hosted.
 
 ## What's in the repo
 
